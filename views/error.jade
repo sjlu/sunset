@@ -1,0 +1,9 @@
+extends layout
+
+block body
+  div.container
+    h2= error.status
+    h3= error.message
+    br
+    if error.stack
+      pre #{error.stack}
