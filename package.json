@@ -11,10 +11,10 @@
     "deploy worker": "./deploy.sh worker",
     "restart web": "./node_modules/naught/lib/main.js deploy ./naught-web.ipc",
     "restart worker": "./node_modules/naught/lib/main.js deploy ./naught-worker.ipc",
-    "start web": "./node_modules/naught/lib/main.js start --ipc-file naught-web.ipc --log ./log/naught-web.log --stdout ./log/stdout-web.log --stderr ./log/stderr-web.log bin/web",
-    "start worker": "./node_modules/naught/lib/main.js start --ipc-file naught-worker.ipc --log ./log/naught-worker.log --stdout ./log/stdout-worker.log --stderr ./log/stderr-worker.log bin/worker",
-    "stop web": "./node_modules/naught/lib/main.js ./naught-web.ipc",
-    "stop worker": "./node_modules/naught/lib/main.js ./naught-worker.ipc",
+    "start web": "./node_modules/naught/lib/main.js start --pid-file naught-web.pid --ipc-file naught-web.ipc --log ./log/naught-web.log --stdout ./log/stdout-web.log --stderr ./log/stderr-web.log bin/web",
+    "start worker": "./node_modules/naught/lib/main.js start --pid-file naught-worker.pid --ipc-file naught-worker.ipc --log ./log/naught-worker.log --stdout ./log/stdout-worker.log --stderr ./log/stderr-worker.log bin/worker",
+    "stop web": "./node_modules/naught/lib/main.js stop ./naught-web.ipc",
+    "stop worker": "./node_modules/naught/lib/main.js stop ./naught-worker.ipc",
     "gulp": "./node_modules/gulp/bin/gulp.js; ./node_modules/gulp/bin/gulp.js watch"
   },
   "dependencies": {
