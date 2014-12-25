@@ -34,7 +34,6 @@ app.use(flash());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // middlewares
-app.use(middlewares.getUserFromAuth);
 
 // routes
 app.use('/', require('./routes/index'));
