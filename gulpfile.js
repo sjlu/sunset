@@ -33,20 +33,24 @@ gulp.task('stylus', function() {
       includeContent: false,
       sourceRoot: '.'
     }))
-    .pipe(gulp.dest('./public/build'));
+    .pipe(gulp.dest('./public/build'))
+    .pipe(livereload())
 });
 
 gulp.task('less', function() {
   gulp
     .src('./public/styles/bootstrap.less')
+    .pipe(plumber())
     .pipe(less())
     .pipe(minifyCSS())
     .pipe(gulp.dest('./public/build'))
+    .pipe(livereload())
 });
 
 gulp.task('html', function() {
   gulp
     .src('./public/client/**/*.jade')
+    .pipe(plumber())
     .pipe(jade({
       doctype: 'html'
     }))
@@ -57,26 +61,47 @@ gulp.task('html', function() {
         return path.basename(file.path);
       }
     }))
-    .pipe(gulp.dest('./public/build/client'));
+    .pipe(gulp.dest('./public/build/client'))
+    .pipe(livereload())
 });
 
 gulp.task('js', function() {
   gulp
     .src('./public/client/**/*.js')
+    .pipe(plumber())
     .pipe(uglify('app.js', {
-      mangle: false
+      mangle: false,
+      outSourceMap: true
     }))
     .pipe(gulp.dest('./public/build/client'))
+    .pipe(livereload())
 })
 
 gulp.task('watch', function() {
-  livereload.listen(22746);
-  gulp.watch('./public/client/**/*.js', ['js']).on('change', livereload.changed);
-  gulp.watch('./public/client/**/*.jade', ['html']).on('change', livereload.changed);
-  gulp.watch('./public/client/**/*.styl', ['stylus']).on('change', livereload.changed);
-  gulp.watch('./public/styles/**/*.styl', ['stylus']).on('change', livereload.changed);
-  gulp.watch('./public/styles/bootstrap.less', ['less']).on('change', livereload.changed);
-  gulp.watch('./views/*').on('change', livereload.changed);
+  livereload.listen({
+    port: 22746
+  });
+
+  var changed = function(file) {
+    var ext = path.extname(file.path);
+    switch(ext) {
+      case '.js': gulp.start('js'); break;
+      case '.jade': gulp.start('html'); break;
+      case '.styl': gulp.start('stylus'); break;
+      case '.less': gulp.start('less'); break;
+    }
+  }
+
+  _.each([
+    './public/client/**/*.js',
+    './public/client/**/*.jade',
+    './public/client/**/*.styl',
+    './public/styles/**/*.styl',
+    './public/styles/bootstrap.less',
+    './views/*'
+  ], function(path) {
+    watch(path, changed);
+  });
 });
 
 gulp.task('default', ['stylus', 'less', 'html', 'js']);
