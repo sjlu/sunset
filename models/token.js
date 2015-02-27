@@ -4,10 +4,10 @@ var Sequelize = require('sequelize');
 var Token = sequelize.define('token', {
   user_id: {
     type: Sequelize.INTEGER
-  }
+  },
   value: {
     type: Sequelize.UUID
   }
 });
 
-module.exports = User;
+module.exports = Token;
