@@ -10,6 +10,7 @@ The project includes the following:
 * Express routing structure
 * Sequelize and MySQL
 * Angular app compiled with Gulp
+* Twitter bootstrap
 * Worker
 * Deployable
 * Test structure
