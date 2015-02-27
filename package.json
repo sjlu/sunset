@@ -17,7 +17,8 @@
     "stop web": "./node_modules/naught/lib/main.js stop ./naught-web.ipc",
     "stop worker": "./node_modules/naught/lib/main.js stop ./naught-worker.ipc",
     "gulp": "./node_modules/gulp/bin/gulp.js; ./node_modules/gulp/bin/gulp.js watch",
-    "test": "./test.sh"
+    "test": "./test.sh",
+    "migrate": "node_modules/.bin/sequelize db:migrate"
   },
   "dependencies": {
     "URIjs": "^1.14.1",

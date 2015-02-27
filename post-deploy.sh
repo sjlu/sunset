@@ -1,2 +1,2 @@
 #!/bin/bash
-node_modules/.bin/sequelize db:migrate
+npm run migrate
