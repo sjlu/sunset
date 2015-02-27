@@ -1,0 +1,6 @@
+var config = require('./config');
+
+module.exports = {
+  "config": "./config",
+  "url": config.MYSQL_URL
+}

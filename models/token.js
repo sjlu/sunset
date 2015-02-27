@@ -6,7 +6,7 @@ var Token = sequelize.define('token', {
     type: Sequelize.INTEGER
   }
   value: {
-    type: Sequelize.UUIDV4
+    type: Sequelize.UUID
   }
 });
 
