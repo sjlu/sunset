@@ -1,0 +1,16 @@
+extends ./layout
+
+block body
+  div(ng-app="#{name}")
+    div.container
+      div(ng-view)
+
+block scripts
+  script(src="/bower_components/angular/angular.min.js")
+  script(src="/bower_components/angular-route/angular-route.min.js")
+  script(src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js")
+  script(src="/bower_components/lodash/lodash.min.js")
+  script(src="/build/#{name}/templates.js")
+  script
+    | window.#{name} = angular.module('#{name}', ['ngRoute', 'templates']);
+  script(src="/build/#{name}/app.js")

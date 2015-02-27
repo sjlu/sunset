@@ -13,6 +13,10 @@ var _ = require('lodash');
 var uglify = require('gulp-uglifyjs');
 var path = require('path');
 
+var apps = [
+  'app',
+]
+
 gulp.task('stylus', function() {
   gulp
     .src('./public/styles/styles.styl')
@@ -48,33 +52,37 @@ gulp.task('less', function() {
 });
 
 gulp.task('html', function() {
-  gulp
-    .src('./public/client/**/*.jade')
-    .pipe(plumber())
-    .pipe(jade({
-      doctype: 'html'
-    }))
-    .pipe(templateCache({
-      filename: 'templates.js',
-      standalone: true,
-      base: function(file) {
-        return path.basename(file.path);
-      }
-    }))
-    .pipe(gulp.dest('./public/build/client'))
-    .pipe(livereload())
+  _.each(apps, function(app) {
+    gulp
+      .src('./'+app+'/**/*.jade')
+      .pipe(plumber())
+      .pipe(jade({
+        doctype: 'html'
+      }))
+      .pipe(templateCache({
+        filename: 'templates.js',
+        standalone: true,
+        base: function(file) {
+          return path.basename(file.path);
+        }
+      }))
+      .pipe(gulp.dest('./public/build/'+app))
+      .pipe(livereload())
+  })
 });
 
 gulp.task('js', function() {
-  gulp
-    .src('./public/client/**/*.js')
-    .pipe(plumber())
-    .pipe(uglify('app.js', {
-      mangle: false,
-      outSourceMap: true
-    }))
-    .pipe(gulp.dest('./public/build/client'))
-    .pipe(livereload())
+  _.each(apps, function(app) {
+    gulp
+      .src('./'+app+'/**/*.js')
+      .pipe(plumber())
+      .pipe(uglify('app.js', {
+        mangle: false,
+        outSourceMap: true
+      }))
+      .pipe(gulp.dest('./public/build/'+app))
+      .pipe(livereload())
+  });
 })
 
 gulp.task('watch', function() {
@@ -92,14 +100,18 @@ gulp.task('watch', function() {
     }
   }
 
-  _.each([
-    './public/client/**/*.js',
-    './public/client/**/*.jade',
-    './public/client/**/*.styl',
+  var paths = [
     './public/styles/**/*.styl',
     './public/styles/bootstrap.less',
     './views/*'
-  ], function(path) {
+  ];
+  _.each(apps, function(app) {
+    paths.push('./'+app+'/**/*.js');
+    paths.push('./'+app+'/**/*.jade');
+    paths.push('./'+app+'/**/*.styl');
+  });
+
+  _.each(paths, function(path) {
     watch(path, changed);
   });
 });

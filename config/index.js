@@ -7,7 +7,7 @@ dotenv.load();
 var config = {
   ENV: 'development',
   SESSION_SECRET: 'AnFDTkRHyDrd87ZKmXfwgZHj',
-  MONGO_URL: 'mongodb://localhost/rgb',
+  MYSQL_URL: 'mysql://root@localhost/sunset',
   REDIS_URL: 'redis://localhost:6379'
 };
 config = _.defaults(process.env, config);

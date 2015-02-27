@@ -1,3 +1,17 @@
-# sunset
+## sunset
 
-A collection of stuff that I tend to write over and over again. This serves as a basic framework structure that can get you off the ground pretty quickly.
+Just a bunch of things that I tend to write over and over again to get a project started. As a
+forewarning, this is highly opinionated and is structured to best practices I deem fit.
+
+The project includes the following:
+
+* Express routing structure
+* Sequelize and MySQL
+* Angular app compiled with Gulp
+* Worker
+* Deployable
+* Test structure
+
+### license
+
+MIT.

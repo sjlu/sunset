@@ -6,15 +6,21 @@ html
     meta(name='description', content='')
 
     title
+        | sunset
 
     link(rel='stylesheet' type='text/css' href='/build/bootstrap.css')
     link(rel='stylesheet' type='text/css' href='/bower_components/font-awesome/css/font-awesome.min.css')
+
+    block stylesheets
+
     link(rel='stylesheet' type='text/css' href='/build/styles.css')
 
   body
     block body
-    block scripts
+
     script(src="/bower_components/jquery/dist/jquery.min.js")
     script(src="/bower_components/twitter/dist/js/bootstrap.min.js")
+    block scripts
+
     if (settings.env === "development")
       script(src="http://localhost:22746/livereload.js")

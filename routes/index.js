@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var middlewares = require('../lib/middlewares');
-var models = require('../lib/models');
+var models = require('../models');
 var validator = require('validator');
 var _ = require('lodash');
 
