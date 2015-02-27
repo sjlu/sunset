@@ -12,9 +12,18 @@ var User = sequelize.define('user', {
   password: {
     type: Sequelize.STRING
   }
+}, {
+  instanceMethods: {
+    validatePassword: function(password, cb) {
+      bcrypt.compare(password, this.password, function(err, match) {
+        if (err) return cb(err);
+        cb(null, match);
+      });
+    }
+  }
 });
 
-var hashPassword = function(instance, done) {
+var hashPassword = function(instance, opts, done) {
   if (!instance.changed('password')) return done();
   bcrypt.hash(instance.get('password'), 10, function (err, hash) {
     if (err) return done(err);
