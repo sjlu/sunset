@@ -1,5 +1,7 @@
 ## sunset
 
+[![Circle CI](https://circleci.com/gh/sjlu/sunset.svg?style=svg)](https://circleci.com/gh/sjlu/sunset)
+
 Just a bunch of things that I tend to write over and over again to get a project started. As a
 forewarning, this is highly opinionated and is structured to best practices I deem fit.
 
