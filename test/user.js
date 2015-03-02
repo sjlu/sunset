@@ -6,11 +6,13 @@ describe(__filename, function() {
   var user;
 
   it('should properly create a user', function(done) {
-    models.User.create({
+    user = models.User.build({
       email: 'test@test.com',
       password: 'testing1'
-    }).done(function(err, model) {
+    })
+    user.save().done(function(err, model) {
       expect(err).to.be.null;
+      expect(model).to.not.be.null;
       user = model;
       done();
     });
