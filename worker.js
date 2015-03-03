@@ -1,18 +1,12 @@
-var qued = require('./lib/qued');
+var queues = require('./lib/queues');
 var jobs = require('./jobs');
 var _ = require('lodash');
 
-_.each(jobs, function(job, key) {
-  qued.addProcess(key, job);
+_.each(queues, function(queue, name) {
+  queue.process(jobs[name]);
 });
-
-var worker = qued.createWorker();
 
 if (process.send) process.send('online');
 process.on('message', function(message) {
-  if (message === 'shutdown') {
-    worker.shutdown(function() {
-      process.exit(0);
-    });
-  };
+  process.exit(0);
 });
